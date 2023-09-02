@@ -17,12 +17,18 @@
     </ul>
   </div>
   <% if current_user.email == 'esteban@a.a' %>
-  <% current_user.notifications.where(read: false).each do |notification| %>
-    <div class="notification">
-      <%= notification.content %>
-    </div>
+    <% current_user.notifications.where(read: false).each do |notification| %>
+      <div class="notification">
+        <%= notification.content %>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
-
+  <% if current_user.email == 'esteban@a.a' %>
+    <% current_user.notifications.where(read: false).each do |notification| %>
+      <div class="notification">
+        <%= notification.content %>
+        <%= button_to 'Marcar como leída', mark_as_read_notification_path(notification), method: :post %>
+      </div>
+    <% end %>
+  <% end %>
 </nav>
-
