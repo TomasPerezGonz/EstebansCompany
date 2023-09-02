@@ -5,5 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
     has_many :job_offers
     has_many :applications
+    has_many :notifications, dependent: :destroy
+
 
 end
