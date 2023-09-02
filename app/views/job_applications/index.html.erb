@@ -1,5 +1,35 @@
 <h1>Mis Postulaciones</h1>
 
+<!-- Botón para ir a la página de ofertas de trabajo -->
+<%= link_to 'Nuevas Postulaciones', job_offers_path, class: 'btn btn-primary' %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Descripción</th>
+      <th>Salario</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @job_offers.each do |job_offer| %>
+      <tr>
+        <td><%= job_offer.title %></td>
+        <td><%= job_offer.description %></td>
+        <td><%= job_offer.salary %></td>
+        <td><%= link_to 'Mostrar', job_offer %></td>
+        <% if current_user.admin? %>
+          <td><%= link_to 'Editar', edit_job_offer_path(job_offer) %></td>
+          <td><%= link_to 'Eliminar', job_offer, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
+        <% else %>
+          <td><%= link_to 'Postular', new_job_application_path(job_offer_id: job_offer.id) %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <ul>
   <% @job_applications.each do |application| %>
     <li>
@@ -7,3 +37,4 @@
     </li>
   <% end %>
 </ul>
+
