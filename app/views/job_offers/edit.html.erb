@@ -1,0 +1,17 @@
+<h1>Editar Oferta Laboral</h1>
+
+<%= form_for @job_offer do |f| %>
+  <%= f.label :title, "Título" %>
+  <%= f.text_field :title %>
+  <br>
+  
+  <%= f.label :description, "Descripción" %>
+  <%= f.text_area :description %>
+  <br>
+  
+  <%= f.label :requirements, "Requisitos" %>
+  <%= f.text_area :requirements %>
+  <br>
+  
+  <%= f.submit "Actualizar Oferta Laboral" %>
+<% end %>
