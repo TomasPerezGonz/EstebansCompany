@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
     has_many :job_offers
-    has_many :applications
+    has_many :job_applications
     has_many :notifications, dependent: :destroy
 
   def admin?
