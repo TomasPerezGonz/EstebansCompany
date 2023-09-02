@@ -1,5 +1,9 @@
 class JobApplicationsController < ApplicationController
 
+    def index
+        @job_applications = current_user.job_applications
+    end
+
     def create
         @job_application = JobApplication.new(user_id: current_user.id, job_offer_id: params[:job_offer_id])
         if @job_application.save

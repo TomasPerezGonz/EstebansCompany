@@ -1,0 +1,9 @@
+<h1>Mis Postulaciones</h1>
+
+<ul>
+  <% @job_applications.each do |application| %>
+    <li>
+      Postulado para: <%= application.job_offer.title %>
+    </li>
+  <% end %>
+</ul>

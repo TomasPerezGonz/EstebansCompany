@@ -14,16 +14,21 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Contacto</a>
       </li>
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to 'Mis Postulaciones', job_applications_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= button_to 'Cerrar Sesión', destroy_user_session_path, method: :delete, class: 'btn btn-link nav-link' %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to 'Iniciar Sesión', new_user_session_path, class: 'nav-link' %>
+        </li>
+      <% end %>
     </ul>
   </div>
-  <% if current_user.email == 'esteban@a.a' %>
-    <% current_user.notifications.where(read: false).each do |notification| %>
-      <div class="notification">
-        <%= notification.content %>
-      </div>
-    <% end %>
-  <% end %>
-  <% if current_user.email == 'esteban@a.a' %>
+  <% if current_user&.email == 'esteban@a.a' %>
     <% current_user.notifications.where(read: false).each do |notification| %>
       <div class="notification">
         <%= notification.content %>
@@ -32,3 +37,4 @@
     <% end %>
   <% end %>
 </nav>
+
