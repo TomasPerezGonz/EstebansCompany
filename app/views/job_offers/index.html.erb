@@ -4,5 +4,7 @@
     <h2><%= job_offer.title %></h2>
     <p><%= job_offer.description %></p>
     <p><%= job_offer.requirements %></p>
+    <%= button_to 'Postular', job_applications_path(job_offer_id: job_offer.id), method: :post %>
   </div>
 <% end %>
+
