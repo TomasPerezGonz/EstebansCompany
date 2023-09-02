@@ -7,5 +7,8 @@ class User < ApplicationRecord
     has_many :applications
     has_many :notifications, dependent: :destroy
 
+  def admin?
+    admin
+  end
 
 end

@@ -1,10 +1,33 @@
-<h1>Ofertas Laborales</h1>
-<% @job_offers.each do |job_offer| %>
-  <div>
-    <h2><%= job_offer.title %></h2>
-    <p><%= job_offer.description %></p>
-    <p><%= job_offer.requirements %></p>
-    <%= button_to 'Postular', job_applications_path(job_offer_id: job_offer.id), method: :post %>
-  </div>
+<%= form_with(url: job_offers_path, method: :get, local: true) do %>
+  <%= label_tag :query, "Buscar:" %>
+  <%= text_field_tag :query, params[:query] %>
+  <%= submit_tag "Buscar", name: nil %>
 <% end %>
-
+<h1>Ofertas de Trabajo</h1>
+<%= link_to 'Nueva Oferta de Trabajo', new_job_offer_path %>
+<table>
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Descripción</th>
+      <th>Salario</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @job_offers.each do |job_offer| %>
+      <tr>
+        <td><%= job_offer.title %></td>
+        <td><%= job_offer.description %></td>
+        <td><%= job_offer.salary %></td>
+        <td><%= link_to 'Mostrar', job_offer %></td>
+        <% if current_user.admin? %>
+          <td><%= link_to 'Mostrar', job_offer %></td>
+          <td><%= link_to 'Editar', edit_job_offer_path(job_offer) %></td>
+          <td><%= link_to 'Eliminar', job_offer, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'Atrás', root_path %>
