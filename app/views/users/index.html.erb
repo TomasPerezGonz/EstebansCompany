@@ -1,0 +1,43 @@
+<h1>Lista de Usuarios</h1>
+
+<% if current_user.admin? %>
+  <%= link_to 'Crear Nuevo Usuario', new_user_path, class: 'btn btn-primary' %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Foto</th>
+      <th>Email</th>
+      <th>Admin</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name %></td>
+        <td>
+          <% if user.photo.attached? %>
+            <%= image_tag url_for(user.photo), alt: "Foto de perfil de #{user.email}", width: 50 %>
+          <% else %>
+            Sin foto
+          <% end %>
+        </td>
+        <td><%= user.email %></td>
+        <td><%= user.admin? ? 'Sí' : 'No' %></td>
+        <td>
+          <%= link_to 'Editar', edit_user_path(user) %>
+          <%= link_to 'Eliminar', user_registration_path(user), method: :delete, data: { confirm: '¿Estás seguro?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+

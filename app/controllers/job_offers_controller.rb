@@ -7,20 +7,28 @@ class JobOffersController < ApplicationController
     end
   
     def new
-      @job_offer = JobOffer.new
+      @job_offer = JobOffer.find(params[:job_offer_id])
+      @job_application = JobApplication.new
     end
+    
   
     def create
       @job_offer = JobOffer.new(job_offer_params)
+      @job_offer.user = current_user 
       if @job_offer.save
         redirect_to job_offers_path, notice: 'Oferta laboral creada con éxito.'
       else
+        puts @job_offer.errors.full_messages 
         render :new
       end
     end
   
+    def show
+    end
+    
     def edit
     end
+    
   
     def update
       if @job_offer.update(job_offer_params)
@@ -48,7 +56,7 @@ class JobOffersController < ApplicationController
     end
   
     def job_offer_params
-      params.require(:job_offer).permit(:title, :description, :requirements)
+      params.require(:job_offer).permit(:title, :description, :requirements, :salary)
     end
   end
   

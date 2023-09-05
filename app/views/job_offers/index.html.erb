@@ -3,31 +3,43 @@
   <%= text_field_tag :query, params[:query] %>
   <%= submit_tag "Buscar", name: nil %>
 <% end %>
+
 <h1>Ofertas de Trabajo</h1>
-<%= link_to 'Nueva Oferta de Trabajo', new_job_offer_path %>
-<table>
-  <thead>
-    <tr>
-      <th>Título</th>
-      <th>Descripción</th>
-      <th>Salario</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @job_offers.each do |job_offer| %>
+
+<% if current_user.admin? %>
+  <%= link_to 'Nueva Oferta Laboral', new_job_offer_path, class: 'btn btn-primary' %>
+<% end %>
+
+
+
+<% if @job_offers.any? %>
+  <table>
+    <thead>
       <tr>
-        <td><%= job_offer.title %></td>
-        <td><%= job_offer.description %></td>
-        <td><%= job_offer.salary %></td>
-        <td><%= link_to 'Mostrar', job_offer %></td>
-        <% if current_user.admin? %>
-          <td><%= link_to 'Mostrar', job_offer %></td>
-          <td><%= link_to 'Editar', edit_job_offer_path(job_offer) %></td>
-          <td><%= link_to 'Eliminar', job_offer, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
-        <% end %>
+        <th>Título</th>
+        <th>Descripción</th>
+        <th>Salario</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @job_offers.each do |job_offer| %>
+        <tr>
+          <td><%= job_offer.title %></td>
+          <td><%= job_offer.description %></td>
+          <td><%= job_offer.salary %></td>
+          <td><%= link_to 'Mostrar', job_offer %></td>
+          <% if current_user.admin? %>
+            <td><%= link_to 'Editar', edit_job_offer_path(job_offer) %></td>
+            <td><%= link_to 'Eliminar', job_offer, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No hay ofertas de trabajo disponibles en este momento.</p>
+<% end %>
+
 <%= link_to 'Atrás', root_path %>
+

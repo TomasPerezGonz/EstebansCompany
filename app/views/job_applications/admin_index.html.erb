@@ -1,0 +1,33 @@
+<h1>Postulaciones realizadas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre del Usuario</th>
+      <th>Foto</th>
+      <th>Nombre de la Postulación</th>
+      <th>Acciones</th> <!-- Nueva columna para las acciones -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @admin_job_applications.each do |application| %>
+      <tr>
+        <td><%= application.user.name %></td>
+        <td>
+          <% if application.user.photo.attached? %>
+            <%= image_tag url_for(application.user.photo), alt: "Foto de perfil de #{application.user.email}", width: 30, class: 'rounded-circle' %>
+          <% end %>
+        </td>
+        <td><%= application.job_offer.title %></td>
+        <td>
+          <% unless application.read? %>
+            <%= button_to 'Marcar como leída', mark_as_read_job_application_path(application), method: :post %>
+          <% else %>
+            Leída
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
