@@ -7,7 +7,7 @@ class JobOffersController < ApplicationController
     end
   
     def new
-      @job_offer = JobOffer.find(params[:job_offer_id])
+      @job_offer = JobOffer.new
       @job_application = JobApplication.new
     end
     

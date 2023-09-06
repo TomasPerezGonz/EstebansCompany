@@ -1,15 +1,23 @@
-<h1><%= @job_offer.title %></h1>
-<p><strong>Descripción:</strong> <%= @job_offer.description %></p>
-<p><strong>Requisitos:</strong> <%= @job_offer.requirements %></p>
-<p><strong>Salario:</strong> <%= @job_offer.salary %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-9 col-md-12">
+      <h1 class="mb-4"><%= @job_offer.title %></h1>
+      <p><strong>Descripción:</strong> <%= @job_offer.description %></p>
+      <p><strong>Requisitos:</strong> <%= @job_offer.requirements %></p>
+      <p><strong>Salario:</strong> <%= @job_offer.salary %></p>
 
-<% if user_signed_in? && !current_user.admin? %>
-  <% if @job_offer.job_applications.where(user_id: current_user.id).exists? %>
-    <p>Ya has postulado a este trabajo.</p>
-  <% else %>
-    <%= button_to 'Postularme a este trabajo', job_applications_path(job_offer_id: @job_offer.id), method: :post, class: 'btn btn-primary' %>
-  <% end %>
-<% end %>
+      <% if user_signed_in? && !current_user.admin? %>
+        <% if @job_offer.job_applications.where(user_id: current_user.id).exists? %>
+          <div class="alert alert-info" role="alert">
+            Ya has postulado a este trabajo.
+          </div>
+        <% else %>
+          <%= button_to 'Postularme a este trabajo', job_applications_path(job_offer_id: @job_offer.id), method: :post, class: 'btn btn-primary mb-3' %>
+        <% end %>
+      <% end %>
 
-<%= link_to 'Volver a la lista de ofertas', job_offers_path %>
+      <%= link_to 'Volver a la lista de ofertas', job_offers_path, class: 'btn btn-secondary mt-3' %>
+    </div>
+  </div>
+</div>
 

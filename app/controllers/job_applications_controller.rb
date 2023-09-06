@@ -37,7 +37,3 @@ class JobApplicationsController < ApplicationController
     end
   end
 end
-
-
-
-

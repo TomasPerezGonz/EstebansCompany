@@ -1,22 +1,32 @@
-<h1>Editar Oferta Laboral</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-9 col-md-12">
+      <h1 class="mb-4">Editar Oferta Laboral</h1>
 
-<%= form_for @job_offer do |f| %>
-  <%= f.label :title, "Título" %>
-  <%= f.text_field :title %>
-  <br>
-  
-  <%= f.label :description, "Descripción" %>
-  <%= f.text_area :description %>
-  <br>
-  
-  <%= f.label :requirements, "Requisitos" %>
-  <%= f.text_area :requirements %>
-  <br>
+      <%= form_for @job_offer, html: { class: 'needs-validation', novalidate: '' } do |f| %>
+        <div class="mb-3">
+          <%= f.label :title, "Título", class: 'form-label' %>
+          <%= f.text_field :title, class: 'form-control', required: '' %>
+        </div>
 
-  <%= f.label :salary, "Salario" %>
-  <%= f.number_field :salary %>
-  <br>
-  
-  <%= f.submit "Actualizar Oferta Laboral" %>
-<% end %>
+        <div class="mb-3">
+          <%= f.label :description, "Descripción", class: 'form-label' %>
+          <%= f.text_area :description, class: 'form-control', required: '' %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :requirements, "Requisitos", class: 'form-label' %>
+          <%= f.text_area :requirements, class: 'form-control', required: '' %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :salary, "Salario", class: 'form-label' %>
+          <%= f.number_field :salary, class: 'form-control', required: '' %>
+        </div>
+
+        <%= f.submit "Actualizar Oferta Laboral", class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>
 

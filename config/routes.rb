@@ -26,14 +26,3 @@ Rails.application.routes.draw do
   
   root 'job_offers#home'
 end
-
-
-
-
-
-
-
-
-
-
-

@@ -1,29 +1,37 @@
-<h1>Mis Postulaciones</h1>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+      <h1 class="text-right">Mis Postulaciones</h1>
 
-<% if @job_applications.any? %>
-  <table>
-    <thead>
-      <tr>
-        <th>Título</th>
-        <th>Descripción</th>
-        <th>Salario</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @job_applications.each do |application| %>
-        <tr>
-          <td><%= application.job_offer.title %></td>
-          <td><%= application.job_offer.description %></td>
-          <td><%= application.job_offer.salary %></td>
-          <td><%= link_to 'Ver Detalles', job_offer_path(application.job_offer) %></td>
-        </tr>
+      <% if @job_applications.any? %>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Título</th>
+              <th>Descripción</th>
+              <th>Salario</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @job_applications.each do |application| %>
+              <tr>
+                <td><%= application.job_offer.title %></td>
+                <td><%= application.job_offer.description %></td>
+                <td><%= application.job_offer.salary %></td>
+                <td><%= link_to 'Ver Detalles', job_offer_path(application.job_offer), class: 'btn btn-info' %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <div class="alert alert-warning" role="alert">
+          No tienes ninguna postulación en este momento.
+        </div>
       <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>No tienes ninguna postulación en este momento.</p>
-<% end %>
+    </div>
+  </div>
+</div>
 
 
 

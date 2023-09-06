@@ -2,8 +2,9 @@
 
 one:
   user: one
-  job_offer: one
+  job_offer: first_offer
 
 two:
   user: two
-  job_offer: two
+  job_offer: second_offer
+
